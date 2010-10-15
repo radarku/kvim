@@ -1,0 +1,3 @@
+[submodule "minibufexplorerer"]
+	path = minibufexplorerer
+	url = http://github.com/vim-scripts/minibufexplorerpp.git

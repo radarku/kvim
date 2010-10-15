@@ -1,9 +1,16 @@
 "--------------------------------
-"-- designed for vim 5.x
-"-- dphase@locnet.net
+"-- VIM Configuration
+"-- Kyle Usbeck
+"--
+"-- Many of these are options are derived from elsewhere,
+"-- so thanks to all who helped!
 "--------------------------------
 
-"-- term setting snarfed from elsewhere
+"-- Turn on pathogen so I can grab plugins from git
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+"-- Syntax Coloring for Specific terminals
 if has("terminfo")
   set t_Co=16
   set t_Sf=^[[3%p1%dm
@@ -16,7 +23,7 @@ else
   set t_vb=
 endif
 
-"-- i code a lot, so here are my defaults
+"-- Settings
 syntax on
 set backspace=2
 set noinsertmode
@@ -25,12 +32,8 @@ set autoindent
 set showmatch
 set ruler
 set showcmd
-set laststatus=2
-set tabstop=3
-set shiftwidth=3
 set nowrap
 set noerrorbells
-set laststatus=2
 set magic
 set report=0
 set shell=/bin/bash
@@ -45,10 +48,9 @@ set incsearch
 set hlsearch
 set showcmd 
 set mouse=n
-set joinspaces	
+set joinspaces 
 set cinoptions=>s,{0,}0,?0,^0,:0,=s,p0,t0,+s,(0,)20,*30
 set shiftround
-set expandtab	
 set iskeyword=@,48-57,_,192-255,-,.,:,/,@-@
 set lazyredraw
 set wildchar=<TAB>
@@ -62,12 +64,12 @@ set shortmess=I
 set grepprg=grep\ -nH\ $*
 set pastetoggle=<Insert>
 
+"-- Spaces (not tabs) 
+set expandtab  
+set tabstop=3
+set shiftwidth=3
 
-
-"inoremap ( ()<ESC>:let leavechar=")"<CR>i
-"inoremap [ []<ESC>:let leavechar="]"<CR>i
-"imap <C-j> <ESC>:exec "normal f" . leavechar<CR>a
-
+"-- Tab completion
 function! InsertTabWrapper(direction)
    let col = col('.') - 1
    if !col || getline('.')[col - 1] !~ '\k'
@@ -81,9 +83,7 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
 inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
 
-"vnoremap _( <ESC>`>a)<ESC>`<i(<ESC>))
-
-"-- kill off and old syntax highlighting cruft
+"-- Syntax Highlighting
 "highlight Comment     NONE
 "highlight Constant    NONE
 highlight Delimiter   NONE
@@ -113,37 +113,37 @@ highlight WarningMsg  NONE
 "-- syntax highlighting, if you want to change the colors here is your guide
 "-- 0 = black, 1 = red, 2 = green, 3 = yellow,
 "-- 4 = blue, 5 = magenta 6 = cyan, 7 = white
-"-- highlight Comment	        ctermbg=2  ctermfg=7
-"highlight Constant		cterm=bold ctermfg=5
-highlight Comment	        ctermfg=6
-highlight Delimiter		cterm=bold ctermfg=1
-highlight Conditional		cterm=bold ctermfg=3
-"highlight Macro			cterm=bold ctermfg=5
-highlight Folded                ctermfg=yellow ctermbg=blue cterm=NONE 
-highlight Directory		ctermfg=DarkBlue
-highlight Error			cterm=bold ctermfg=1 ctermbg=2
-highlight ErrorMsg		cterm=bold ctermfg=1
-highlight Include		ctermfg=5
-highlight Identifier		ctermfg=3
-highlight LineNr		cterm=none ctermfg=7 ctermbg=0
-highlight ModeMsg		cterm=bold ctermfg=3 ctermbg=1
-highlight MoreMsg		cterm=bold ctermfg=2
-highlight NonText		cterm=bold ctermfg=4
-"highlight Normal		cterm=bold ctermfg=15 ctermbg=0
-"highlight PreProc		ctermfg=14
-highlight Question		cterm=bold ctermfg=2
-highlight Search		ctermbg=2
-highlight Special		cterm=bold ctermfg=4
-highlight Operator		cterm=bold ctermfg=1
-highlight SpecialKey		ctermfg=DarkBlue
-highlight Statement		cterm=bold ctermfg=3
-highlight StatusLine		ctermfg=0 ctermbg=7
-highlight StatusLineNC		cterm=bold ctermfg=0 ctermbg=3
-highlight Title			cterm=bold ctermfg=4
-highlight Todo			ctermfg=red ctermbg=yellow
-highlight Type		        cterm=bold ctermfg=2
-highlight Visual		cterm=bold ctermfg=1 ctermbg=3
-highlight WarningMsg		cterm=bold ctermfg=1 ctermbg=4
+"highlight Comment         ctermbg=2  ctermfg=7
+"highlight Constant        cterm=bold ctermfg=5
+highlight Comment          ctermfg=6
+highlight Delimiter        cterm=bold ctermfg=1
+highlight Conditional      cterm=bold ctermfg=3
+"highlight Macro           cterm=bold ctermfg=5
+highlight Folded           ctermfg=yellow ctermbg=blue cterm=NONE 
+highlight Directory        ctermfg=DarkBlue
+highlight Error            cterm=bold ctermfg=1 ctermbg=2
+highlight ErrorMsg         cterm=bold ctermfg=1
+highlight Include          ctermfg=5
+highlight Identifier       ctermfg=3
+highlight LineNr           cterm=none ctermfg=7 ctermbg=0
+highlight ModeMsg          cterm=bold ctermfg=3 ctermbg=1
+highlight MoreMsg          cterm=bold ctermfg=2
+highlight NonText          cterm=bold ctermfg=4
+"highlight Normal          cterm=bold ctermfg=15 ctermbg=0
+"highlight PreProc         ctermfg=14
+highlight Question         cterm=bold ctermfg=2
+highlight Search           ctermbg=2
+highlight Special          cterm=bold ctermfg=4
+highlight Operator         cterm=bold ctermfg=1
+highlight SpecialKey       ctermfg=DarkBlue
+highlight Statement        cterm=bold ctermfg=3
+highlight StatusLine       ctermfg=0 ctermbg=7
+highlight StatusLineNC     cterm=bold ctermfg=0 ctermbg=3
+highlight Title            cterm=bold ctermfg=4
+highlight Todo             ctermfg=red ctermbg=yellow
+highlight Type             cterm=bold ctermfg=2
+highlight Visual           cterm=bold ctermfg=1 ctermbg=3
+highlight WarningMsg       cterm=bold ctermfg=1 ctermbg=4
 
 "-- custom keymappings, this will change frequently
 map :W :w
@@ -157,30 +157,7 @@ map <silent> <Leader><Leader> :nohlsearch<cr>
 "map ,jf  o/***<ESC>i<RETURN> @file<TAB>%<RETURN><RETURN>@brief<TAB><RETURN><RETURN>@author<TAB>Joshua Shaffer<RETURN><RETURN><ESC>!!date<RETURN><ESC>^i *  @date<TAB><ESC>$a<RETURN><RETURN><RETURN>$Id$<RETURN><RETURN>$Log$<RETURN><RETURN><ESC>^a/<SPACE><RETURN><ESC>
 
 
-
-"-- emacs movement is a wonderful thing
-"cnoremap <C-A> <Home>
-"cnoremap <C-F> <Right>
-"cnoremap <C-B> <Left>
-"cnoremap <ESC>b <S-Left>
-"cnoremap <ESC>f <S-Right>
-"cnoremap <ESC><C-H> <C-W>
-
-"cmap ;rcm %s/<C-M>//g
-
-"-- emacs editing keybindings for insert mode
-"imap <C-A>  <ESC>0i
-"imap <C-B>  <ESC>hi
-"imap <C-D>  <ESC>xi
-"imap <C-E>  <ESC>A
-"imap <C-F>  <ESC>lli
-"imap <C-N>  <ESC>jli
-"imap <C-P>  <ESC>kli
-"imap <ESC>b <ESC>bi
-"imap <ESC>f <ESC>lWi
-
-
-"Make buffer switching easier
+"--Make buffer switching easier
 nmap <C-n> :MBEbn<cr>
 nmap <C-p> :MBEbp<cr>
 nmap <C-h> <C-w>h<cr>
@@ -189,7 +166,6 @@ nmap <C-j> <C-w>j<cr>
 nmap <C-k> <C-w>k<cr>
 nmap <C-y> :Dox<cr>
 
-"--Auto Command 
 
 """""""""""""""""""""""""""""""""""""""""""""
 " now set filetype-based rules (autocommands)
@@ -215,10 +191,11 @@ if has("autocmd")
   autocmd FileType * set formatoptions=tcql nocindent nowrap comments& spell
   autocmd FileType pl,java  set omnifunc=javacomplete#Complete formatoptions=croql cindent nowrap comments=sr:/*,mb:*,el:*/,:// spell
   "autocmd FileType java  set makeprg=ant\ -emacs\ -find\ build.xml\ 
-  "autocmd FileType h,c,cpp  set formatoptions=croql cindent nowrap comments=sr:/*,mb:*,el:*/,:// spell
-  autocmd FileType h,c,cpp  set cindent nowrap comments=sr:/*,mb:*,el:*/,:// nospell
+  autocmd FileType h,c,cpp  set formatoptions=croql cindent nowrap comments=sr:/*,mb:*,el:*/,:// spell
   autocmd FileType tex set textwidth=75 spell spelllang=en_us
   autocmd FileType lsp so $VIM/syntax/lisp.vim 
+  "autocmd FileType js so $VIM/syntax/javascript.vim set nospell
+  "autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
   
   " add support for changing timestamp during every save
   " adapted from: http://www.naglenet.org/vim/vim.html#tip_date
@@ -232,15 +209,15 @@ if has("autocmd")
 
   " Enable editing of gzipped files
   " set binary mode before reading the file
-  autocmd BufReadPre,FileReadPre	*.gz,*.bz2 set bin
-  autocmd BufReadPost,FileReadPost	*.gz call GZIP_read("gunzip")
-  autocmd BufReadPost,FileReadPost	*.bz2 call GZIP_read("bunzip2")
-  autocmd BufWritePost,FileWritePost	*.gz call GZIP_write("gzip")
-  autocmd BufWritePost,FileWritePost	*.bz2 call GZIP_write("bzip2")
-  autocmd FileAppendPre			*.gz call GZIP_appre("gunzip")
-  autocmd FileAppendPre			*.bz2 call GZIP_appre("bunzip2")
-  autocmd FileAppendPost		*.gz call GZIP_write("gzip")
-  autocmd FileAppendPost		*.bz2 call GZIP_write("bzip2")
+  autocmd BufReadPre,FileReadPre *.gz,*.bz2 set bin
+  autocmd BufReadPost,FileReadPost  *.gz call GZIP_read("gunzip")
+  autocmd BufReadPost,FileReadPost  *.bz2 call GZIP_read("bunzip2")
+  autocmd BufWritePost,FileWritePost   *.gz call GZIP_write("gzip")
+  autocmd BufWritePost,FileWritePost   *.bz2 call GZIP_write("bzip2")
+  autocmd FileAppendPre       *.gz call GZIP_appre("gunzip")
+  autocmd FileAppendPre       *.bz2 call GZIP_appre("bunzip2")
+  autocmd FileAppendPost      *.gz call GZIP_write("gzip")
+  autocmd FileAppendPost      *.bz2 call GZIP_write("bzip2")
 
   " After reading compressed file: Uncompress text in buffer with "cmd"
   fun! GZIP_read(cmd)
@@ -350,74 +327,14 @@ endfunction
 set foldexpr=FoldBrace()
 "set foldmethod=expr    
 
-" Adds the #define to protect h files when h files are created.
-function! s:insert_gates()
-        let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-        execute "normal i#ifndef " . gatename
-        execute "normal o#define " . gatename . "   "
-        execute "normal Go#endif /* " . gatename . " */"
-        normal kk
-endfunction
+"-- Highlights leading tabs and spaces
+map <Leader>t :/^\t\+<CR>
+map <Leader>s :/^\s\+<CR>
 
-" Adds the *addgroup comments for doxygen
-map <Leader>t :call InsertTemplate()<CR>
-
-function! GetModuleName()
-        let filePath = expand("%:p:h:r")
-        let filePath = substitute(filePath,'.*\/','','g')
-        return filePath
-endfunction
-
-function! EMPTY()
-        call AppendAndMove("")
-endfunction
-
-function! AppendAndMove(text)
-        call append(line("."),a:text)
-        call cursor(line(".")+1,0)
-endfunction
-
-function! InsertTemplate()
-        let moduleName = GetModuleName()
-        let ln = line(".")
-        call EMPTY()
-        call AppendAndMove( 'namespace drakontas {'          )
-        call AppendAndMove( '/** \addtogroup ' . moduleName  )
-        call AppendAndMove( ' *   @{'                        )
-        call AppendAndMove( ' */'                            )
-        call EMPTY()
-        call EMPTY()
-        call AppendAndMove( '/** @} */'                      )
-        call AppendAndMove( '}'                              )
-        call EMPTY()
-
-        call cursor(ln+6,0)
-endfunction 
-
-autocmd  BufNewFile *.{h,hpp} call <SID>insert_gates() 
-
-"Search and replace highlighted word.
+"-- Search and replace highlighted word.
 nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
 
-au BufRead ~/.article*,~/tmp/mutt* set tw=72
-" Remove quoted On blah stuff
-" au BufRead ~/.article*,~/tmp/mutt* :normal ,cqmh
-" Remove empty quoted lines
-au BufRead ~/.article*,~/tmp/mutt* :normal ,ceql
-" Remove the empty lines after an unquoted On blah stuff
-au BufRead ~/.article*,~/tmp/mutt* :normal ,db
-" Clear empty lines and turn into space to write in
-au BufRead ~/.article*,~/tmp/mutt* :normal ,cqel
-" Remove blocks of empty lines
-au BufRead ~/.article*,~/tmp/mutt* :normal ,dl
-" Remove many Re:'s from the Subject line
-au BufRead ~/.article*,~/tmp/mutt* :normal ,re
-" Place cursor at end of first quoted paragraph (should be right place after
-" ,cqmh)
-au BufRead ~/.article*,~/tmp/mutt* :normal gg/^On.*wrote:$ }
-
-au BufRead golded.msg 1d
-
+"-- Java options
 hi HL_HiCurLine ctermfg=yellow ctermbg=blue cterm=NONE
 hi javaCommentTitle cterm=bold ctermfg=4 ctermbg=NONE
 let java_highlight_java_lang_ids=1
@@ -426,9 +343,12 @@ let java_highlight_functions="style"
 let java_highlight_debug=1
 hi link javaParen Comment
 
+"-- Status Line
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+set laststatus=2
 hi StatusLineNC ctermfg=black ctermbg=DarkGray cterm=NONE
 
-"Colors for miniBufExplorer
+"-- Colors for miniBufExplorer
 "-- 0 = black, 1 = red, 2 = green, 3 = yellow,
 "-- 4 = blue, 5 = magenta 6 = cyan, 7 = white
 hi MBENormal  guibg=darkblue cterm=none ctermfg=7
