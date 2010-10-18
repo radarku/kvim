@@ -6,10 +6,6 @@
 "-- so thanks to all who helped!
 "--------------------------------
 
-"-- Turn on pathogen so I can grab plugins from git
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-
 "-- Syntax Coloring for Specific terminals
 if has("terminfo")
   set t_Co=16
@@ -355,3 +351,9 @@ hi MBENormal  guibg=darkblue cterm=none ctermfg=7
 hi MBEVisibleNormal guibg=darkblue cterm=none ctermfg=6
 hi MBEChanged guibg=darkblue cterm=none ctermfg=5
 hi MBEVisibleChanged guibg=darkblue cterm=none ctermfg=2
+
+"-- Settings for miniBufExplorer
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1 

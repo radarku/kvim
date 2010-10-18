@@ -1,0 +1,2 @@
+"set makeprg=ant\ -emacs\ -find\ build.xml\ 
+set makeprg=ant\ -find\ build.xml\ 
